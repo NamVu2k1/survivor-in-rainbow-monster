@@ -44,7 +44,19 @@ public class Bot : Player
         return Random.Range(0, 0.6f);
     }
     public   string RandomName()
-    {
-        return Random.Range(0, 999).ToString();
+    { int value = Random.Range(0, 999);
+        if (value < 10)
+        {
+            return "00" + value.ToString();
+        }
+        else if (9 < value && value < 100)
+        {
+            return "0" + value.ToString();
+        }
+        else
+        {
+            return value.ToString();
+        }
+        
     }
 }
