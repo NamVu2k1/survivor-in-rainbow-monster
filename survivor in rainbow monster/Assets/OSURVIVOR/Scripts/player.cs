@@ -3,41 +3,61 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public interface A_Interface
+public class Player : MonoBehaviour
 {
-    abstract void Run();
-}
-public class Player : MonoBehaviour,A_Interface
-{
-    
-    public bool idle;
-   
-    void Start()
+    [SerializeField]
+    protected float speed;
+    [SerializeField]
+    protected bool idle = true;
+    protected bool isTriggerArea;
+    public Rigidbody2D rb2d;
+    protected Animator m_animator;
+    protected bool isRun;
+    protected Text NameBot;
+    private void Awake()
     {
-        idle = true;
+        rb2d = gameObject.GetComponent<Rigidbody2D>();
+        m_animator = gameObject.GetComponent<Animator>();
+        NameBot = gameObject.GetComponentInChildren<Text>();
+        NameBot.text = "456";
     }
-    
-    
-    void Update()
+   
+    private void Update()
     {
         if(Input.GetMouseButton(0))
         {
+            isRun = true;            
             Run();
         }    
         if(Input.GetMouseButtonUp(0))
         {
             idle = true;
+            isRun = false;
+            m_animator.SetBool("Run", isRun);
         }
     }
 
     public void Run()
     {
         idle = false;
-        gameObject.transform.Translate(-1 * Time.deltaTime, 0, 0);
-        if(GameController._Controller.check && idle == false)
+        m_animator.SetBool("Run", isRun);
+        gameObject.transform.Translate(-speed * Time.deltaTime, 0, 0);
+        if (GameController._Controller.isCheck == true && idle == false)
         {
-            Debug.Log("gameover");
-        }
-       
+            if(isTriggerArea == false)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+
+            }
+            
+        }     
     }
+    public void TriggerAreA()
+    {
+        isTriggerArea = true;
+    }
+   
 }
