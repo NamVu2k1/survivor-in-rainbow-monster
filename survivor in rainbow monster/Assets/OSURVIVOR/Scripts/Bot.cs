@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 public class Bot : Player
 {
     public float _timeMove;
@@ -14,10 +15,10 @@ public class Bot : Player
     private void Update()
     {
         _timeMove -= Time.deltaTime;   
-        if ( _timeMove > 0)
+        if ( _timeMove > 0 && isTriggerFinishLine == false)
         {
             DelayMove -= Time.deltaTime;
-            if (DelayMove < 0)
+            if (DelayMove < 0 )
             {
                 isRun = true;
                 Run();
@@ -25,11 +26,13 @@ public class Bot : Player
         }
         else if(_timeMove < -3 && GameController._Controller.isCheck == false)
         {
+           
             DelayMove = RandomTimeDelayMove();
             _timeMove = RandomTimeMove();          
-        }
+        }       
         else
         {
+           
             idle = true;
             isRun = false;
             m_animator.SetBool("Run", isRun);
@@ -58,5 +61,15 @@ public class Bot : Player
             return value.ToString();
         }
         
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Finish line"))
+        {
+            isTriggerFinishLine = true;
+          
+            gameObject.transform.DOMoveX(gameObject.transform.position.x - 0.8f, 1f);
+            Debug.Log("trigger");
+        }
     }
 }

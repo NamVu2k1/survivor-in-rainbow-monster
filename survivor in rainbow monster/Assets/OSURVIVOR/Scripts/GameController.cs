@@ -32,22 +32,16 @@ public class GameController : MonoBehaviour
             timeMoveCountdown = timeMove;            
             yield return new WaitForSeconds(timeMove);         
             isCheck = true;
+            Ground._instance.RedGround();
             BotGirlController.instance.RedLight();
             yield return new WaitForSeconds(timeCheck);
             isCheck = false;
+            Ground._instance.GreenGround();
             BotGirlController.instance.GreenLight();
 
         }
     }
 
    
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-           
-            collision.GetComponent<Player>().TriggerAreA();
-        }
-
-    }
+    
 }
