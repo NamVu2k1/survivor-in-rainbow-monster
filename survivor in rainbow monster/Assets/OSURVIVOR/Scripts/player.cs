@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
             isRun = true;
         }
 
-        if(Input.GetMouseButton(0) && isTriggerFinishLine == false)
+        if(Input.GetMouseButton(0) && isTriggerFinishLine == false && !Utils.IsPointerOverUIElement())
         {    
             Run();
         }    
@@ -41,23 +41,23 @@ public class Player : MonoBehaviour
         {
             speed = 0;           
             idle = true;
-            isRun = false;
-           
+            isRun = false;           
             m_animator.SetBool("Run", isRun);
         }
     }
 
     public void Run()
     {
+        bool pass = false;
         idle = false;
-        m_animator.SetBool("Run", isRun);
-        
+        m_animator.SetBool("Run", isRun);        
         gameObject.transform.Translate(-speed * Time.deltaTime, 0, 0);
         if (GameController._Controller.isCheck == true && idle == false)
         {
-            if(isTriggerFinishLine == false)
-            {
-                Destroy(gameObject);
+            if(isTriggerFinishLine == false && pass == false)
+            {                
+                pass = true;
+                Die();  
             }
             else
             {
@@ -70,5 +70,20 @@ public class Player : MonoBehaviour
         isTriggerFinishLine = true;
         gameObject.transform.DOMoveX(gameObject.transform.position.x - 0.8f, 5f);
     }
-   
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Finish line"))
+        {
+            isTriggerFinishLine = true;
+            gameObject.transform.DOMoveX(gameObject.transform.position.x - 0.8f, 1f);
+            GameController._Controller.isVictory = true;
+            UIController.instance.PassLevel();
+        }
+    }
+    public virtual void Die()
+    {
+        GameController._Controller.isLose = true;
+        UIController.instance.Lose();
+        m_animator.SetTrigger("Die");   
+    }
 }

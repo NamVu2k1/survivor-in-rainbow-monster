@@ -25,6 +25,5 @@ public class BotGirlController : MonoBehaviour
     {
         SpriteGirl.color = Color.red;
         anim.SetBool("isCheck", true);
-    }
-   
+    } 
 }

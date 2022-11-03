@@ -5,12 +5,14 @@ public class Bot : Player
 {
     public float _timeMove;
     float DelayMove;
+    
     private void Start()
     {
         NameBot = gameObject.GetComponentInChildren<Text>();
         NameBot.text = RandomName();
         _timeMove = RandomTimeMove();
         DelayMove = RandomTimeDelayMove();
+        
     }
     private void Update()
     {
@@ -46,7 +48,7 @@ public class Bot : Player
     {
         return Random.Range(0, 0.6f);
     }
-    public   string RandomName()
+    public string RandomName()
     { int value = Random.Range(0, 999);
         if (value < 10)
         {
@@ -72,4 +74,9 @@ public class Bot : Player
             Debug.Log("trigger");
         }
     }
+    public override void Die()
+    {
+        speed = 0;
+        m_animator.SetTrigger("Die");
+    }    
 }

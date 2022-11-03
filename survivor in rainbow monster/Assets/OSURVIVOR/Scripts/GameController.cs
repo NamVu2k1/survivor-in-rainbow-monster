@@ -9,6 +9,10 @@ public class GameController : MonoBehaviour
     public float timeCheck = 3;
     public float timeMove;
     public float timeMoveCountdown;
+    public bool isVictory;
+    public bool isLose;
+
+
     private void Awake()
     {
         _Controller = this;
@@ -26,11 +30,11 @@ public class GameController : MonoBehaviour
     }
     IEnumerator Turn()
     {
-        while(true)
+        while (true)//(isVictory == false && isLose == false)
         {
             timeMove = Random.Range(2.5f, 4f);
-            timeMoveCountdown = timeMove;            
-            yield return new WaitForSeconds(timeMove);         
+            timeMoveCountdown = timeMove;
+            yield return new WaitForSeconds(timeMove);
             isCheck = true;
             Ground._instance.RedGround();
             BotGirlController.instance.RedLight();
@@ -38,10 +42,7 @@ public class GameController : MonoBehaviour
             isCheck = false;
             Ground._instance.GreenGround();
             BotGirlController.instance.GreenLight();
-
         }
-    }
 
-   
-    
+    }
 }

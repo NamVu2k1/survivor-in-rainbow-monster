@@ -6,17 +6,36 @@ using DG.Tweening;
 
 public class UIController : MonoBehaviour
 {
-    public Text Time_txt;
-    float ValueTime = 45;
     public static UIController instance;
+    public Text Time_txt;
+    float ValueTime = 45;   
     public Transform Panel;
     public Image TimeMove_slider;
-
+    public GameObject WinUI;
+    public GameObject LoseUI;
 
     private void Awake()
     {
         instance = this;
+
     }
+    private void Start()
+    {
+        WinUI.SetActive(false);
+        LoseUI.SetActive(false);
+    }
+    public void PassLevel()
+    {
+        WinUI.SetActive(true);
+        WinUI.transform.localScale = new Vector3(0, 0, 0);
+        WinUI.transform.DOScale(1, 1f).SetEase(Ease.OutBack);
+    }
+    public void Lose()
+    {
+        LoseUI.SetActive(true);
+        LoseUI.transform.localScale = new Vector3(0, 0, 0);
+        LoseUI.transform.DOScale(1, 1f).SetEase(Ease.OutBack);
+    }    
     public void UpdateTimer(float value)
     {
         ValueTime -= Time.deltaTime;
