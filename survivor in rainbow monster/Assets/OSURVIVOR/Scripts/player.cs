@@ -6,16 +6,17 @@ using DG.Tweening;
 
 public class Player : MonoBehaviour
 {
-    private static Player _instance;
-    [SerializeField]
+    private static Player _instance;    
     protected float speed;
-    [SerializeField]
-    protected bool idle = true;
-    protected bool isTriggerFinishLine;
     public Rigidbody2D rb2d;
     protected Animator m_animator;
-    protected bool isRun;
     protected Text NameBot;
+
+
+    protected bool isRun;
+    protected bool idle = true;
+    protected bool isTriggerFinishLine;
+    bool FirstClick;
     private void Awake()
     {
         _instance = this;
@@ -29,8 +30,14 @@ public class Player : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
+           
             speed = 0.8f;
             isRun = true;
+            //if(FirstClick == false)
+            //{
+            //    GameController._Controller.Playgame();
+            //    FirstClick = true;
+            //}
         }
 
         if(Input.GetMouseButton(0) && isTriggerFinishLine == false && !Utils.IsPointerOverUIElement())

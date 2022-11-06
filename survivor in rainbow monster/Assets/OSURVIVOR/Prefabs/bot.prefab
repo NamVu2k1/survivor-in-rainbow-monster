@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2457250813056938109}
   - component: {fileID: 1300402683}
   - component: {fileID: 699678204}
-  - component: {fileID: 699678205}
   - component: {fileID: 699678201}
   m_Layer: 0
   m_Name: bot
@@ -100,10 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b84a86d9bfad77a4fb65f2a0258464d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.8
-  idle: 0
   rb2d: {fileID: 0}
-  _timeMove: 0
+  _timeMove: 3
 --- !u!61 &1300402683
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -151,32 +148,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &699678205
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2457250813056938098}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.9121304, y: 1.38}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!95 &699678201
 Animator:
   serializedVersion: 3

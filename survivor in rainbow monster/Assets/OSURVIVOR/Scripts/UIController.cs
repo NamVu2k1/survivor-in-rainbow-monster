@@ -36,10 +36,10 @@ public class UIController : MonoBehaviour
         LoseUI.transform.localScale = new Vector3(0, 0, 0);
         LoseUI.transform.DOScale(1, 1f).SetEase(Ease.OutBack);
     }    
-    public void UpdateTimer(float value)
+    public void UpdateTimer(float value, float valuetime)
     {
-        ValueTime -= Time.deltaTime;
-        Time_txt.text = GetTimeAsString(ValueTime);
+      
+        Time_txt.text = GetTimeAsString(valuetime);
         TimeMove_slider.fillAmount = value;
         
     }

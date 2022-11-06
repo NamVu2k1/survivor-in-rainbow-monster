@@ -12,7 +12,7 @@ public class Bot : Player
         NameBot.text = RandomName();
         _timeMove = RandomTimeMove();
         DelayMove = RandomTimeDelayMove();
-        
+        speed = 0.8f;
     }
     private void Update()
     {
