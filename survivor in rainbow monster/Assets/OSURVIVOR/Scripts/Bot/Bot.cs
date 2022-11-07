@@ -2,22 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class botMoveMent : MonoBehaviour
+public class Bot : MonoBehaviour
 {
     // Start is called before the first frame update
     Text NameBot;
+    BotMovement bot;
     void Start()
     {
         NameBot = gameObject.GetComponentInChildren<Text>();
         NameBot.text = RandomName();
+       
+    }
+    private void OnValidate()
+    {
+        bot = gameObject.GetComponent<BotMovement>();
+        bot.enabled = false;
     }
 
-    // Update is called once per frame
+  
     void Update()
     {
         if (GameController._Controller.FirstClick >= 1)
         {
-            gameObject.GetComponent<Bot>().enabled = true;
+            bot.enabled = true;
         }
     }
     public string RandomName()

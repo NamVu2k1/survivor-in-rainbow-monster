@@ -14,6 +14,7 @@ public class UIController : MonoBehaviour
     public Image TimeMove_slider;
     public GameObject WinUI;
     public GameObject LoseUI;
+    public GameObject PauseUI;
 
 
     private void Awake()
@@ -23,7 +24,7 @@ public class UIController : MonoBehaviour
     }
     public void RestartBtn()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void HomeBtn()
     {
@@ -33,6 +34,7 @@ public class UIController : MonoBehaviour
     {
         WinUI.SetActive(false);
         LoseUI.SetActive(false);
+        PauseUI.SetActive(false);
     }
     public void PassLevel()
     {
@@ -46,6 +48,23 @@ public class UIController : MonoBehaviour
         LoseUI.transform.localScale = new Vector3(0, 0, 0);
         LoseUI.transform.DOScale(1, 1f).SetEase(Ease.OutBack);
     }    
+    public void onPause()
+    {
+        Time.timeScale = 0;
+        PauseUI.SetActive(true);
+        PauseUI.transform.localScale = new Vector3(0, 0, 0);
+        PauseUI.transform.DOScale(1, 1f).SetEase(Ease.OutBack).SetUpdate(true);
+    }
+
+    public void ClosePause()
+    {
+        Time.timeScale = 1;
+        PauseUI.SetActive(false);
+    }
+    public void Play()
+    {
+
+    }
     public void UpdateTimer(float value, float valuetime)
     {
       

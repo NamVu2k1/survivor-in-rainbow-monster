@@ -193,7 +193,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Battle
 --- !u!222 &610570988
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 725007470}
   - component: {fileID: 725007469}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Green, Red Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -459,7 +459,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Green, Red Light
 --- !u!222 &1048227481
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -481,7 +481,7 @@ GameObject:
   - component: {fileID: 1300353753}
   - component: {fileID: 1300353752}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Battle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

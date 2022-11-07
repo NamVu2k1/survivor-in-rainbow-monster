@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Events;
 public class GameController : MonoBehaviour
 {
     public static GameController _Controller; 
@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     public bool isLose;
     public int FirstClick;
 
-   
+    public UnityEvent m_MyEvent = new UnityEvent();
     private void Awake()
     {
         _Controller = this;
@@ -23,10 +23,6 @@ public class GameController : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-       
-    }
     private void Update()
     {
         timeMoveCountdown -= Time.deltaTime;
@@ -40,22 +36,20 @@ public class GameController : MonoBehaviour
             Playgame();
             FirstClick += 1;
         }
-       
     }
     public void Playgame()
     {
         StartCoroutine(Turn());
     }
-   
     IEnumerator Turn()
     {
        
         while (true)
         {
-           
+            
             timeMove = Random.Range(2f, 6f);
             //Sound.Instance.AudioRobotGirl(timeMove);
-    
+            
             timeMoveCountdown = timeMove;
             //
             yield return new WaitForSeconds(timeMove);
@@ -69,5 +63,13 @@ public class GameController : MonoBehaviour
             BotGirlController.instance.GreenLight();
         }
 
+    }
+    public void addlistener(UnityAction even)
+    {
+        m_MyEvent.AddListener(even);
+    }
+    public void removelistener(UnityAction even)
+    {
+        m_MyEvent.RemoveListener(even);
     }
 }

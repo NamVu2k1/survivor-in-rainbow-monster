@@ -1,7 +1,7 @@
 using UnityEngine;
 
 using DG.Tweening;
-public class Bot : Player
+public class BotMovement : MovementGreenReedLight
 {
     public float _timeMove;
     float DelayMove;
@@ -43,25 +43,27 @@ public class Bot : Player
     }
     float RandomTimeMove()
     {
-        return Random.Range(GameController._Controller.timeMove - 0.6f, GameController._Controller.timeMove + 0.1f);
+        return Random.Range(GameController._Controller.timeMove - 1.2f, GameController._Controller.timeMove + 0.3f);
     }
     float RandomTimeDelayMove()
     {
         return Random.Range(0, 0.6f);
+    }
+
+    public override void Die()
+    {
+        m_animator.SetTrigger("Die");
+        Destroy(gameObject);
+        GameController._Controller.m_MyEvent.Invoke();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Finish line"))
         {
             isTriggerFinishLine = true;
-          
+
             gameObject.transform.DOMoveX(gameObject.transform.position.x - 0.8f, 1f);
             Debug.Log("trigger");
         }
     }
-    public override void Die()
-    {
-        Destroy(gameObject);
-        m_animator.SetTrigger("Die");
-    }    
 }
