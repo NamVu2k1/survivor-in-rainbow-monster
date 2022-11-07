@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     protected float speed;
     public Rigidbody2D rb2d;
     protected Animator m_animator;
-    protected Text NameBot;
+    Text NameBot;
 
 
     protected bool isRun;
@@ -77,6 +77,13 @@ public class Player : MonoBehaviour
         isTriggerFinishLine = true;
         gameObject.transform.DOMoveX(gameObject.transform.position.x - 0.8f, 5f);
     }
+    public virtual void Die()
+    {
+        GameController._Controller.isLose = true;
+        UIController.instance.Lose();
+        m_animator.SetTrigger("Die");
+        Destroy(gameObject);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Finish line"))
@@ -87,10 +94,5 @@ public class Player : MonoBehaviour
             UIController.instance.PassLevel();
         }
     }
-    public virtual void Die()
-    {
-        GameController._Controller.isLose = true;
-        UIController.instance.Lose();
-        m_animator.SetTrigger("Die");   
-    }
+   
 }

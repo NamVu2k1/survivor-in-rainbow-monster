@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
 
@@ -14,9 +15,18 @@ public class UIController : MonoBehaviour
     public GameObject WinUI;
     public GameObject LoseUI;
 
+
     private void Awake()
     {
         instance = this;
+
+    }
+    public void RestartBtn()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void HomeBtn()
+    {
 
     }
     private void Start()

@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/OSURVIVOR/Scenes/Green Light Red Light.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/OSURVIVOR/Scenes/main.unity
+    guid: 9d2ecc9288ca76146ab1f0391d784f17
   m_configObjects: {}

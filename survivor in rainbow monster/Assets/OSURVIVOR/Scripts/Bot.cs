@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
+
 using DG.Tweening;
 public class Bot : Player
 {
@@ -7,38 +7,39 @@ public class Bot : Player
     float DelayMove;
     
     private void Start()
-    {
-        NameBot = gameObject.GetComponentInChildren<Text>();
-        NameBot.text = RandomName();
+    {       
         _timeMove = RandomTimeMove();
         DelayMove = RandomTimeDelayMove();
         speed = 0.8f;
     }
     private void Update()
     {
-        _timeMove -= Time.deltaTime;   
-        if ( _timeMove > 0 && isTriggerFinishLine == false)
-        {
-            DelayMove -= Time.deltaTime;
-            if (DelayMove < 0 )
+        
+            _timeMove -= Time.deltaTime;
+            if (_timeMove > 0 && isTriggerFinishLine == false)
             {
-                isRun = true;
-                Run();
+                DelayMove -= Time.deltaTime;
+                if (DelayMove < 0)
+                {
+                    isRun = true;
+                    Run();
+                }
             }
-        }
-        else if(_timeMove < -3 && GameController._Controller.isCheck == false)
-        {
-           
-            DelayMove = RandomTimeDelayMove();
-            _timeMove = RandomTimeMove();          
-        }       
-        else
-        {
-           
-            idle = true;
-            isRun = false;
-            m_animator.SetBool("Run", isRun);
-        }       
+            else if (_timeMove < -3 && GameController._Controller.isCheck == false)
+            {
+
+                DelayMove = RandomTimeDelayMove();
+                _timeMove = RandomTimeMove();
+            }
+            else
+            {
+
+                idle = true;
+                isRun = false;
+                m_animator.SetBool("Run", isRun);
+            }
+        
+      
     }
     float RandomTimeMove()
     {
@@ -47,22 +48,6 @@ public class Bot : Player
     float RandomTimeDelayMove()
     {
         return Random.Range(0, 0.6f);
-    }
-    public string RandomName()
-    { int value = Random.Range(0, 999);
-        if (value < 10)
-        {
-            return "00" + value.ToString();
-        }
-        else if (9 < value && value < 100)
-        {
-            return "0" + value.ToString();
-        }
-        else
-        {
-            return value.ToString();
-        }
-        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -76,7 +61,7 @@ public class Bot : Player
     }
     public override void Die()
     {
-        speed = 0;
+        Destroy(gameObject);
         m_animator.SetTrigger("Die");
     }    
 }

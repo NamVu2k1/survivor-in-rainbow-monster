@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
 public class GameController : MonoBehaviour
 {
     public static GameController _Controller; 
@@ -13,13 +12,15 @@ public class GameController : MonoBehaviour
     public float timeMoveCountdown;
     public bool isVictory;
     public bool isLose;
+    public int FirstClick;
 
-    private static UnityEvent updateCoinEvent = new UnityEvent();
+   
     private void Awake()
     {
         _Controller = this;
         timeMoveCountdown = timeMove;
-        Playgame();
+        timeGameCountdown = 45;
+
     }
 
     private void Start()
@@ -34,27 +35,27 @@ public class GameController : MonoBehaviour
         {
             UIController.instance.UpdateTimer(timeMoveCountdown / timeMove,timeGameCountdown);
         }
+        if(Input.GetMouseButtonDown(0) && FirstClick == 0)
+        {
+            Playgame();
+            FirstClick += 1;
+        }
+       
     }
     public void Playgame()
     {
         StartCoroutine(Turn());
     }
-    public void AddListener(UnityAction updatecoin)
-    {
-        updateCoinEvent.AddListener(updatecoin);
-    }
-    public void RemoveListener(UnityAction updatecoin)
-    {
-        updateCoinEvent.RemoveListener(updatecoin);
-    }
+   
     IEnumerator Turn()
     {
-        updateCoinEvent.Invoke();
-        while (true)//(isVictory == false && isLose == false)
+       
+        while (true)
         {
+           
             timeMove = Random.Range(2f, 6f);
-            Sound.Instance.AudioRobotGirl(timeMove);
-            timeGameCountdown = 45;
+            //Sound.Instance.AudioRobotGirl(timeMove);
+    
             timeMoveCountdown = timeMove;
             //
             yield return new WaitForSeconds(timeMove);
