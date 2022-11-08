@@ -17,4 +17,8 @@ public class StrikerController : MonoBehaviour
     {
         anim.SetTrigger("shot");
     }
+    void gunfireAudio()
+    {
+        Sound.Instance.Gunfire();
+    }
 }

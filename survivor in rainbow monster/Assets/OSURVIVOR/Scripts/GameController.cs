@@ -48,7 +48,7 @@ public class GameController : MonoBehaviour
         {
             
             timeMove = Random.Range(2f, 6f);
-            //Sound.Instance.AudioRobotGirl(timeMove);
+            SoundBotGirl._instance.AudioRobotGirl(timeMove);
             
             timeMoveCountdown = timeMove;
             //

@@ -5,13 +5,22 @@ using UnityEngine;
 public class Sound : MonoBehaviour
 {
     public static Sound Instance;
-    public AudioClip AudioGround; 
-   
-    public AudioClip RobotGirl;
+    public AudioClip AudioGround;
+    public AudioClip AudioGunfire;
+
     public AudioSource audioSource;
     private void Awake()
     {
-        Instance = this;
+        if(Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(Instance);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
     }
     private void OnValidate()
     {
@@ -23,15 +32,14 @@ public class Sound : MonoBehaviour
     }
     private void Start()
     {
-        PlayAudioGround();
+       
     }
     public void PlayAudioGround()
     {
         audioSource.PlayOneShot(AudioGround);
     }
-    public void AudioRobotGirl(float timeMove)
+    public void Gunfire()
     {
-        audioSource.pitch = 4.833f/ timeMove;
-        audioSource.PlayOneShot(RobotGirl);
+        audioSource.PlayOneShot(AudioGunfire);
     }
 }

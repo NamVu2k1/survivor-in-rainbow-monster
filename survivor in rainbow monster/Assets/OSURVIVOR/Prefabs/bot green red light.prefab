@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9213440488668060310}
   - component: {fileID: 1331577843480686341}
   m_Layer: 0
-  m_Name: bot
+  m_Name: bot green red light
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,9 +74,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: -1074952233
+  m_SortingLayer: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: 4247961026626158209, guid: f4c792c0cc5c59940acb78c1299cf807, type: 3}
   m_Color: {r: 0.745283, g: 0.70806724, b: 0.26366144, a: 1}
   m_FlipX: 1
@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb2d: {fileID: 0}
+  pass: 0
   _timeMove: 0
 --- !u!1 &2898338416527689994
 GameObject:

@@ -28,7 +28,7 @@ public class UIController : MonoBehaviour
     }
     public void HomeBtn()
     {
-
+        SceneManager.LoadScene(2);
     }
     private void Start()
     {

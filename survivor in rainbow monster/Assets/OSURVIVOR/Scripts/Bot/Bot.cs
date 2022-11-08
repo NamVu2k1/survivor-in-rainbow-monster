@@ -7,11 +7,14 @@ public class Bot : MonoBehaviour
     // Start is called before the first frame update
     Text NameBot;
     BotMovement bot;
+    GameController controller;
     void Start()
     {
         NameBot = gameObject.GetComponentInChildren<Text>();
         NameBot.text = RandomName();
-       
+        controller = FindObjectOfType<GameController>();
+
+
     }
     private void OnValidate()
     {
@@ -19,13 +22,20 @@ public class Bot : MonoBehaviour
         bot.enabled = false;
     }
 
-  
     void Update()
     {
-        if (GameController._Controller.FirstClick >= 1)
+        if(controller == null)
         {
-            bot.enabled = true;
+
         }
+        else
+        {
+            if (controller.FirstClick >= 1)
+            {
+                bot.enabled = true;
+            }
+        }
+       
     }
     public string RandomName()
     {
