@@ -5,10 +5,11 @@ using UnityEngine;
 public class StrikerController : MonoBehaviour
 {
     Animator anim;
-    private void OnValidate()
+    private void Awake()
     {
         anim = gameObject.GetComponent<Animator>();
     }
+   
     void Start()
     {
         GameController._Controller.addlistener(shotting);

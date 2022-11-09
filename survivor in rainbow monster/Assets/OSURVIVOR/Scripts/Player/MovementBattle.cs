@@ -6,18 +6,20 @@ using UnityEngine.EventSystems;
 public class MovementBattle : MonoBehaviour
 {
     Animator anim;
-    Rigidbody2D rg;
-
+    Rigidbody2D rb;
+    protected Vector3 theScale;
     public float speed;
-    public GameObject joystick;
-    public GameObject joystickBG;
-    public Vector2 joystickVec;
+    [SerializeField]
+    private GameObject joystick;
+    [SerializeField]
+    private GameObject joystickBG;
+    Vector2 joystickVec;
     private Vector2 joystickTouchPos;
     private Vector2 joystickOriginalPos;
     private float joystickRadius;
     private void Awake()
     {
-        rg = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
     void Start()
@@ -25,15 +27,16 @@ public class MovementBattle : MonoBehaviour
         joystickOriginalPos = joystickBG.transform.position;
         joystickRadius = joystickBG.GetComponent<RectTransform>().sizeDelta.y / 4;
     }
-   
-    public void PointerDown()
+    [SerializeField]
+    private void PointerDown()
     {
-        Debug.Log("down");
+      
         joystick.transform.position = Input.mousePosition;
         joystickBG.transform.position = Input.mousePosition;
         joystickTouchPos = Input.mousePosition;
     }
-    public void Drag(BaseEventData baseEventData)
+    [SerializeField]
+    private void Drag(BaseEventData baseEventData)
     {
 
 
@@ -55,7 +58,8 @@ public class MovementBattle : MonoBehaviour
         flip();
         run();
     }
-    public void PointerUp()
+    [SerializeField]
+    private void PointerUp()
     {
         joystickVec = Vector2.zero;
         joystick.transform.position = joystickOriginalPos;
@@ -65,34 +69,39 @@ public class MovementBattle : MonoBehaviour
     }
     void run()
     {
-        rg.velocity = new Vector3(joystickVec.x*speed, joystickVec.y*speed, 0);
+        rb.velocity = new Vector3(joystickVec.x*speed, joystickVec.y*speed, 0);
         anim.SetBool("Run", true);
     }
-    void flip()
+    public virtual void flip()
     {
         if(joystickVec.x < 0)
         {
-            Vector3 theScale = transform.localScale;
+            theScale = transform.localScale;
             theScale.x = -1;
             transform.localScale = theScale;
         }
         else
         {
-            Vector3 theScale = transform.localScale;
+            theScale = transform.localScale;
             theScale.x = 1;
             transform.localScale = theScale;
         }
     }
-    public void Attack()
+    protected void Attack()
     {
         anim.SetTrigger("Attack");
-        rg.velocity = Vector2.zero;
+        rb.velocity = Vector2.zero;
         anim.SetBool("Run", false);
-        
+       
     }
-    void GunfireSound()
+    protected void GunfireSound()
     {
         Sound.Instance.Gunfire();
     }
-
+    public virtual void OnHit()
+    {
+        Destroy(gameObject);
+        UIController.instance.Lose();   
+    }
+    
 }

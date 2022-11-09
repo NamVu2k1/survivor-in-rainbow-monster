@@ -75,7 +75,6 @@ public class MovementGreenReedLight : MonoBehaviour
         m_animator.SetTrigger("Die");
         Destroy(gameObject);
     }
-     
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Finish line"))

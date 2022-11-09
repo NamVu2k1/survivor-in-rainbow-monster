@@ -8,20 +8,17 @@ public class Bot : MonoBehaviour
     Text NameBot;
     BotMovement bot;
     GameController controller;
+    private void Awake()
+    {
+        bot = gameObject.GetComponent<BotMovement>();
+    }
     void Start()
     {
         NameBot = gameObject.GetComponentInChildren<Text>();
         NameBot.text = RandomName();
         controller = FindObjectOfType<GameController>();
 
-
     }
-    private void OnValidate()
-    {
-        bot = gameObject.GetComponent<BotMovement>();
-        bot.enabled = false;
-    }
-
     void Update()
     {
         if(controller == null)

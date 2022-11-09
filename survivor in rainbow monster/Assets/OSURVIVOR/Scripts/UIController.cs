@@ -15,7 +15,7 @@ public class UIController : MonoBehaviour
     public GameObject WinUI;
     public GameObject LoseUI;
     public GameObject PauseUI;
-
+    public GameObject holdToMove_txt;
 
     private void Awake()
     {
@@ -28,7 +28,7 @@ public class UIController : MonoBehaviour
     }
     public void HomeBtn()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("OSURVIVOR/Scenes/main");
     }
     private void Start()
     {
@@ -64,6 +64,10 @@ public class UIController : MonoBehaviour
     public void Play()
     {
 
+    }
+    public void HoldToMove()
+    {
+        holdToMove_txt.transform.DOScale(0.5f, 1f).OnComplete(() => holdToMove_txt.SetActive(false));
     }
     public void UpdateTimer(float value, float valuetime)
     {

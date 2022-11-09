@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/OSURVIVOR/Scenes/main.unity
+    guid: 9d2ecc9288ca76146ab1f0391d784f17
+  - enabled: 1
     path: Assets/OSURVIVOR/Scenes/Green Light Red Light.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/OSURVIVOR/Scenes/Battle.unity
     guid: f748b39b59154e340a988bfb18b5d016
-  - enabled: 1
-    path: Assets/OSURVIVOR/Scenes/main.unity
-    guid: 9d2ecc9288ca76146ab1f0391d784f17
   m_configObjects: {}

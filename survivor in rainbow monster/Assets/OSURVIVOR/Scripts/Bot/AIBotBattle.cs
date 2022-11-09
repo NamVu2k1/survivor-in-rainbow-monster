@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIBotBattle : MonoBehaviour
+public class AIBotBattle : MovementBattle
 {
-    public float speed;
+  
+    public float attackspeed;
     Rigidbody2D rb;
     SpriteRenderer sprite;
     Animator anim;
+    Collider2D col;
+
+
     void Start()
     {
+        col = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
@@ -19,6 +24,7 @@ public class AIBotBattle : MonoBehaviour
    
     void Update()
     {
+        attackspeed -= Time.deltaTime; 
        
     }
     IEnumerator AI()
@@ -31,7 +37,7 @@ public class AIBotBattle : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(1f,5f));
             rb.velocity = Vector2.zero;
             anim.SetBool("Run", false);
-            yield return new WaitForSeconds(Random.Range(0, 2f));
+            yield return new WaitForSeconds(Random.Range(0, 1f));
         }
     }
     void randomVectorVelocity()
@@ -40,20 +46,33 @@ public class AIBotBattle : MonoBehaviour
       
         //rb.velocity = new Vector3(1, 1, 0);
     }
-    void flip()
+    public override void flip()
     {
-        if (rb.velocity.x > 0)
+        if (rb.velocity.x < 0)
         {
-
-            Vector3 theScale = transform.localScale;
+            theScale = transform.localScale;
             theScale.x = -1;
             transform.localScale = theScale;
         }
         else
         {
-            Vector3 theScale = transform.localScale;
+            theScale = transform.localScale;
             theScale.x = 1;
             transform.localScale = theScale;
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player") && attackspeed < 0)
+        {
+            Invoke("Attack", Random.Range(0, 1f));
+            attackspeed = 3;
+        }
+    }
+    public override void OnHit()
+    {
+      
+        Destroy(gameObject);      
+    }
+
 }

@@ -15,12 +15,14 @@ public class GameController : MonoBehaviour
     public int FirstClick;
 
     public UnityEvent m_MyEvent = new UnityEvent();
+
+ 
     private void Awake()
     {
         _Controller = this;
         timeMoveCountdown = timeMove;
         timeGameCountdown = 45;
-
+      
     }
 
     private void Update()
@@ -34,6 +36,8 @@ public class GameController : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && FirstClick == 0)
         {
             Playgame();
+            UIController.instance.HoldToMove();
+            Sound.Instance.VolumeDown();
             FirstClick += 1;
         }
     }
