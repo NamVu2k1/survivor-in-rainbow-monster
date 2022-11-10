@@ -7,7 +7,6 @@ using DG.Tweening;
 public class Player : MonoBehaviour
 {
     public static Player _instance;    
-   
     Text NameBot;
 
     private void Awake()

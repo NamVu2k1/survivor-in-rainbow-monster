@@ -8,12 +8,14 @@ public class Bot : MonoBehaviour
     Text NameBot;
     BotMovement bot;
     GameController controller;
+    
     private void Awake()
     {
         bot = gameObject.GetComponent<BotMovement>();
     }
     void Start()
     {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(Random.Range(0, 1f), Random.Range(0, 1f), Random.Range(0, 1f), 1);
         NameBot = gameObject.GetComponentInChildren<Text>();
         NameBot.text = RandomName();
         controller = FindObjectOfType<GameController>();

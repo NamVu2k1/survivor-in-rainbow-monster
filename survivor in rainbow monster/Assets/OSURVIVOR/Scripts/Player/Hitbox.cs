@@ -8,9 +8,7 @@ public class Hitbox : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            ALive.instance.m_MyEvent.Invoke();
             collision.SendMessage("OnHit");
-          
         }
     }
 }

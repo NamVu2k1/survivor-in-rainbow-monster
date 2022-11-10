@@ -65,24 +65,26 @@ public class MovementGreenReedLight : MonoBehaviour
     public virtual void TriggerFinishLine()
     {
         isTriggerFinishLine = true;
-        gameObject.transform.DOMoveX(gameObject.transform.position.x - 0.8f, 5f);
+        gameObject.transform.DOMoveX(gameObject.transform.position.x - 0.8f, 1f);
     }
     public virtual void Die()
     {
-        GameController._Controller.m_MyEvent.Invoke();
-        GameController._Controller.isLose = true;
-        UIController.instance.Lose();
+        UIController.instance.Lose_Event.Invoke();
         m_animator.SetTrigger("Die");
         Destroy(gameObject);
+    }
+    private void OnDisable()
+    {
+        ALive.instance.RemoveBot(gameObject);
+        GameController._Controller.m_MyEvent.Invoke();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Finish line"))
         {
-            isTriggerFinishLine = true;
-            gameObject.transform.DOMoveX(gameObject.transform.position.x - 0.8f, 1f);
-            GameController._Controller.isVictory = true;
-            UIController.instance.PassLevel();
+            TriggerFinishLine();
+            UIController.instance.Win_Event.Invoke();
+            ALive.instance.RemoveBot(gameObject);
         }
     }
 

@@ -5,14 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class SceneMain : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        Debug.Log("start");
         Sound.Instance.PlayAudioGround();
     }
-
-    // Update is called once per frame
     public void GreenRedLightScene()
     {
         SceneManager.LoadScene("OSURVIVOR/Scenes/Green Light Red Light");

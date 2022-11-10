@@ -25,7 +25,6 @@ public class AIBotBattle : MovementBattle
     void Update()
     {
         attackspeed -= Time.deltaTime; 
-       
     }
     IEnumerator AI()
     {
@@ -71,8 +70,12 @@ public class AIBotBattle : MovementBattle
     }
     public override void OnHit()
     {
-      
+        ALive.instance.RemoveBot(gameObject);
         Destroy(gameObject);      
+    }
+    void win()
+    {
+
     }
 
 }
