@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class IgnoreCollision : MonoBehaviour
 {
-    public List<GameObject> bots;
+    
+    public List<Transform> bots;
+  
     public GameObject player;
     private void Awake()
     {
+        for(int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            bots.Add(gameObject.transform.GetChild(i));
+        }
+        
         for (int i = 0; i < bots.Count - 1; i++)
         {
             var cur = bots[i].GetComponents<Collider2D>()[0];
@@ -23,5 +30,9 @@ public class IgnoreCollision : MonoBehaviour
                 Physics2D.IgnoreCollision(cur, other);
             }
         }
+    }
+    private void Update()
+    {
+        Debug.Log(bots.Count);
     }
 }

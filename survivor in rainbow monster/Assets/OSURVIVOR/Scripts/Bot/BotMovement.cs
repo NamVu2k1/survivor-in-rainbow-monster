@@ -5,7 +5,6 @@ public class BotMovement : MovementGreenReedLight
 {
     public float _timeMove;
     float DelayMove;
-    
     private void Start()
     {       
         _timeMove = RandomTimeMove();
@@ -49,11 +48,14 @@ public class BotMovement : MovementGreenReedLight
     {
         return Random.Range(0, 0.6f);
     }
-
     public override void Die()
     {
         m_animator.SetTrigger("Die");
         Destroy(gameObject);
+    }
+    private void OnDisable()
+    {
+        ALive.instance.RemoveBot(gameObject);
         GameController._Controller.m_MyEvent.Invoke();
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -61,9 +63,8 @@ public class BotMovement : MovementGreenReedLight
         if (collision.CompareTag("Finish line"))
         {
             isTriggerFinishLine = true;
-
             gameObject.transform.DOMoveX(gameObject.transform.position.x - 0.8f, 1f);
-            Debug.Log("trigger");
+            ALive.instance.RemoveBot(gameObject);
         }
     }
 }
